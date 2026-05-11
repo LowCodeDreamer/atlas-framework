@@ -1,0 +1,48 @@
+# Atlas-Framework .gitignore
+# Framework repo carries patterns and templates, not instance state.
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Test artifacts
+/tmp/
+test-instance/
+.test-*
+
+# Local secrets (should never be committed; framework uses templates only)
+.env
+.env.local
+*.secret
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Node (if any future tooling)
+node_modules/
+
+# When this repo is also INITIALIZED as an instance during dev (don't do this normally,
+# but just in case), ignore the instance-state directories:
+/working/active/*
+/working/inbox/*
+/working/completed/*
+/working/archive/*
+/system/proposals/*
+/logs/sessions/*
+
+# Allow .gitkeep files
+!.gitkeep
