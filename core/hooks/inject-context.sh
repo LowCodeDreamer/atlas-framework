@@ -8,8 +8,25 @@
 #   INSTANCE_VALUES         # pipe-separated value list
 #   INSTANCE_GREETING       # what to say at session start
 
-INSTANCE_HOME="${INSTANCE_HOME:-$(pwd)}"
 CWD=$(pwd)
+
+# Resolve INSTANCE_HOME: walk up from CWD until we find system/identity.env (the instance marker)
+# Falls back to env var or CWD if not found.
+find_instance_home() {
+    local d=$1
+    while [[ "$d" != "/" ]] && [[ -n "$d" ]]; do
+        if [[ -f "$d/system/identity.env" ]]; then
+            echo "$d"
+            return 0
+        fi
+        d=$(dirname "$d")
+    done
+    return 1
+}
+
+if [[ -z "${INSTANCE_HOME:-}" ]]; then
+    INSTANCE_HOME=$(find_instance_home "$CWD" || echo "$CWD")
+fi
 
 # Load instance identity
 if [[ -f "$INSTANCE_HOME/system/identity.env" ]]; then
