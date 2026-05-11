@@ -1,0 +1,17 @@
+---
+type: service
+name: {{SERVICE_NAME}}
+---
+# {{SERVICE_NAME_TITLE}} (service)
+
+(Short description. For full operational reference see `_manifest.md`.)
+
+## When working here
+
+- Read `_manifest.md` for ops commands
+- Check `logs/` (or follow `_manifest.md` logs path) for recent state
+- Follow service-specific conventions in this directory's existing code/config
+
+## Parent
+
+This service is operated by the {{INSTANCE_NAME}} instance. See `{{INSTANCE_HOME}}/CLAUDE.md` for instance-wide context.

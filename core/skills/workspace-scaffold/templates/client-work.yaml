@@ -1,0 +1,110 @@
+# Client Work Project Structure
+# For: External deliverables, consulting projects
+# Project type: client_work
+
+name: client-work
+description: Structure for client-facing projects with deliverables
+
+directories:
+  - deliverables
+  - correspondence
+  - references
+  - status
+
+files:
+  - path: _domain.md
+    template: domain
+    required: true
+
+  - path: README.md
+    template: readme-client
+    required: true
+
+  - path: PLAN.md
+    template: plan-link
+    required: true
+
+  - path: status/current.md
+    template: status-current
+    required: true
+
+  - path: deliverables/.gitkeep
+    template: gitkeep
+    required: true
+
+  - path: correspondence/.gitkeep
+    template: gitkeep
+    required: true
+
+  - path: references/.gitkeep
+    template: gitkeep
+    required: true
+
+templates:
+  gitkeep: |
+    # Placeholder to keep directory in git
+
+  readme-client: |
+    # {project_name}
+
+    **Client:** {client_name}
+    **Status:** Active
+
+    ## Overview
+
+    {description}
+
+    ## Structure
+
+    - `deliverables/` - Client-ready outputs
+    - `correspondence/` - Communication records
+    - `references/` - Client-provided materials
+    - `status/` - Project status tracking
+
+    ## Key Dates
+
+    - Started: {created_at}
+    - Target: {deadline}
+
+    ## Deliverables
+
+    | Deliverable | Status | Due |
+    |-------------|--------|-----|
+    | {item 1} | Pending | {date} |
+
+    ## Resources
+
+    - [Project Plan](./PLAN.md)
+    - [Current Status](./status/current.md)
+
+  status-current: |
+    # Current Status
+
+    **Last Updated:** {date}
+    **Overall Status:** On Track
+
+    ## This Week
+
+    ### Completed
+    -
+
+    ### In Progress
+    -
+
+    ### Blocked
+    -
+
+    ## Next Week
+
+    -
+
+    ## Risks & Issues
+
+    | Issue | Impact | Mitigation |
+    |-------|--------|------------|
+    | | | |
+
+    ## Client Communication
+
+    - Last contact: {date}
+    - Next scheduled: {date}

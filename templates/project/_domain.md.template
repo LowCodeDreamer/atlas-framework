@@ -1,0 +1,19 @@
+# {{PROJECT_NAME_TITLE}}
+
+Project-specific knowledge for {{DOMAIN}}/{{PROJECT_NAME}}.
+
+## Overview
+
+(Brief description.)
+
+## Decisions
+
+<!-- Track architectural and design decisions as they're made -->
+
+## Learnings
+
+<!-- Capture insights as work progresses -->
+
+## References
+
+<!-- Links, docs, resources -->

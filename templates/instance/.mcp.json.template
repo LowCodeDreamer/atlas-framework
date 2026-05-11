@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "_comment": "Add instance-wide MCP servers here. Use ${ENV_VAR} syntax for credentials, never hardcode tokens. Per-workstation MCPs go in workstations/<ws>/.mcp.json. Per-project MCPs go in projects/<domain>/<project>/.mcp.json."
+  }
+}

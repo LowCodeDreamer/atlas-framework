@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "_comment": "Add workstation-scoped MCP servers here. Use ${ENV_VAR} for credentials. Available only when working in this workstation."
+  }
+}

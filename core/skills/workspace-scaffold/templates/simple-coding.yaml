@@ -1,0 +1,75 @@
+# Simple Coding Project Structure
+# For: Small projects, scripts, single-purpose tools
+# Complexity: simple (score 1-7)
+
+name: simple-coding
+description: Minimal structure for simple coding projects
+
+directories:
+  - src
+
+files:
+  - path: _domain.md
+    template: domain
+    required: true
+
+  - path: README.md
+    template: readme
+    required: true
+
+  - path: PLAN.md
+    template: plan-link
+    required: true
+
+  - path: src/main.py
+    template: python-main
+    condition: tech_stack.languages contains 'python'
+
+  - path: src/main.ts
+    template: typescript-main
+    condition: tech_stack.languages contains 'typescript'
+
+  - path: src/main.js
+    template: javascript-main
+    condition: tech_stack.languages contains 'javascript'
+
+# File templates (embedded for simplicity)
+templates:
+  python-main: |
+    """
+    {project_name}
+
+    {description}
+    """
+
+    def main():
+        pass
+
+    if __name__ == "__main__":
+        main()
+
+  typescript-main: |
+    /**
+     * {project_name}
+     *
+     * {description}
+     */
+
+    function main(): void {
+      // TODO: Implement
+    }
+
+    main();
+
+  javascript-main: |
+    /**
+     * {project_name}
+     *
+     * {description}
+     */
+
+    function main() {
+      // TODO: Implement
+    }
+
+    main();

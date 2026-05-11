@@ -1,0 +1,24 @@
+---
+type: toggles
+description: Feature flags for this instance. Edit in place; changes take effect on next session.
+---
+# Toggles
+
+Per-instance feature flags. Hooks and skills can read these to enable/disable behaviors.
+
+## Active toggles
+
+| Toggle | Value | Notes |
+|--------|-------|-------|
+| auto_apply_proposals | off | Set to `on` to enable auto-apply on low-risk proposals |
+| session_logging | on | Whether to write session logs to `logs/sessions/` |
+| domain_context_injection | on | Whether `inject-domain-context.sh` runs |
+| validation_strict | on | Whether validators block on errors (off = warn only) |
+| n8n_logging | off | Whether `log-to-n8n.sh` posts events to n8n (requires endpoint config) |
+
+## Adding toggles
+
+To add a toggle:
+1. Add a row above with `name | initial_value | one-line note`
+2. Reference in your hook/skill: `grep "^| <name> " ${INSTANCE_HOME}/system/toggles.md | awk '{print $4}'`
+3. Document the toggle in the consuming hook/skill's documentation

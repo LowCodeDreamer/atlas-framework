@@ -1,0 +1,34 @@
+---
+id: domain_{{INSTANCE_NAME}}
+type: domain
+created_at: {{INIT_DATE}}
+updated_at: {{INIT_DATE}}
+version: 1
+status: active
+---
+# {{INSTANCE_NAME_TITLE}}
+
+Root domain context for the {{INSTANCE_NAME}} instance.
+
+## Purpose
+
+(Describe what this instance is for in 1-3 sentences.)
+
+## Vision
+
+(What does success look like? Long-form okay.)
+
+## Active areas
+
+(List active workstations, projects, or services. Update as the instance grows.)
+
+## Related instances
+
+(If this instance integrates with other framework instances — e.g., personal vault, other VPS — list them here with one-line context.)
+
+## Key files
+
+- [[CLAUDE.md|Cascade root]]
+- [[system/registries/services|Service registry]]
+- [[system/registries/workstations|Workstation registry]]
+- [[expertise/domains/_registry|Domain registry]]

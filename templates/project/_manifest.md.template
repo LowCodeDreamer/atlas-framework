@@ -1,0 +1,37 @@
+---
+project: {{PROJECT_NAME}}
+domain: {{DOMAIN}}
+type: {{PROJECT_TYPE}}
+phase: {{PROJECT_PHASE}}
+stack: []
+mcps:
+  required: []
+  optional: []
+credentials: []
+agents: []
+skills: []
+context_budget: standard
+created: {{INIT_DATE}}
+updated: {{INIT_DATE}}
+---
+
+# {{PROJECT_NAME_TITLE}}
+
+(One-paragraph project description. What is this work? Why does it exist? When does it end?)
+
+## Goals
+
+- (specific, measurable goal 1)
+- (specific, measurable goal 2)
+
+## Constraints
+
+(Time, budget, dependencies, things that can't change.)
+
+## Status
+
+`{{PROJECT_PHASE}}` — (one-line current state)
+
+## Notes
+
+(Free-form context that informs future work on this project.)

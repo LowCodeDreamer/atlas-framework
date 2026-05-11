@@ -1,0 +1,19 @@
+# Frontmatter Template for Normalized Files
+# Copy and fill in values during normalization
+
+---
+id: ${DATE}_${SLUG}
+type: ${TYPE}  # note | reference | artifact | media | data
+created_at: ${CREATED_AT}
+updated_at: ${UPDATED_AT}
+title: ${TITLE}
+summary: ${SUMMARY}
+tags:
+  - ${TAG1}
+  - ${TAG2}
+  - ${TAG3}
+status: draft
+confidence: ${CONFIDENCE}  # high | medium | low
+source_file: ${SOURCE_FILE}
+source_type: ${SOURCE_MIME}
+---

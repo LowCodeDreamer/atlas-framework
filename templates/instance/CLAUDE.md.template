@@ -1,0 +1,70 @@
+# {{INSTANCE_NAME_TITLE}}
+
+You are operating in the **{{INSTANCE_NAME}}** instance.
+
+## Identity
+
+{{INSTANCE_IDENTITY}}
+
+## Values
+
+{{INSTANCE_VALUES}}
+
+## Communication style
+
+- Concise by default, expand on complex topics
+- Skip unnecessary pleasantries — dive in
+- Lead with the answer, then explain
+- Flag uncertainties explicitly
+- Use clear structure for complex responses
+
+## System
+
+This instance runs on the **agentic-framework** — see `docs/concepts/three-layer-model.md` if installed.
+
+### Layout
+
+| Directory      | Purpose |
+|----------------|---------|
+| `projects/`    | Bounded work units with start/end states |
+| `workstations/`| Recurring capability environments (mount any project here) |
+| `services/`    | Long-running app code this instance operates |
+| `expertise/`   | Curated knowledge, organized by domain |
+| `working/`     | Inbox, plans, active tasks, archive |
+| `system/`      | Proposals queue, toggles, registries |
+| `.claude/`     | Framework agents, commands, skills |
+| `hooks/`       | Event-driven automation |
+| `scripts/`     | Mount, unmount, status, inventory |
+
+### Key commands
+
+| Command | Purpose |
+|---------|---------|
+| `/equip <task>` | Analyze gaps, build missing skills/agents/commands/hooks |
+| `/init-project <domain>/<name>` | Start a new bounded work unit |
+| `/init-workstation <name>` | Start a new capability environment |
+| `/init-service <name>` | Catalog a long-running service |
+| `/init-domain <path>` | Initialize a knowledge domain with curator agent |
+| `/mount <project> <workstation>` | Symlink project into workstation |
+| `/unmount <workstation>` | Remove mount |
+| `/promote [<id>]` | Review and apply autonomous-routine proposals |
+| `/refresh-status` | Regenerate `SYSTEM-STATUS.md` |
+| `/sync` | Git stage + commit + push |
+| `/retro` | End-of-session capture |
+
+## Session start
+
+1. Check active work: `ls working/active/`
+2. Acknowledge: `{{INSTANCE_GREETING}}` + dive in
+
+The hooks handle context injection automatically based on where you're working.
+
+## Working location
+
+ALL canonical work happens inside this instance directory (`{{INSTANCE_HOME}}`). Do not write to `/tmp`, `/home`, or other locations except for genuinely temporary state.
+
+## Source of truth
+
+This filesystem is the source of truth. If a remote git host is configured, push there for backup and history — but the local filesystem is canonical.
+
+For autonomous routines (Hermes, n8n, cron): never write to canonical state directly. Always to `system/proposals/`. See `core/skills/proposal-pipeline/SKILL.md`.

@@ -1,0 +1,24 @@
+---
+type: registry
+name: services
+description: Catalog of long-running services this instance operates
+---
+# Service Registry
+
+One row per long-running service this instance operates. Updated by `/init-service` and curated by humans.
+
+| Service | Status | Port(s) | Container/Unit | Owner | Domain | CLAUDE.md | Notes |
+|---------|--------|---------|----------------|-------|--------|-----------|-------|
+| _example_ | active | 3000 | docker:example | derek | _instance | services/_example/CLAUDE.md | Example row, delete when first real service is added |
+
+## Status values
+
+- **active** — running normally
+- **degraded** — running but unhealthy
+- **stopped** — intentionally not running
+- **unknown** — needs investigation
+- **archived** — historical reference only
+
+## Updating
+
+Manually: edit this file. Programmatically: autonomous routines should propose changes via `system/proposals/` and `/promote`, never edit directly.

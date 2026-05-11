@@ -1,0 +1,85 @@
+# Research Project Structure
+# For: Analysis, investigation, documentation projects
+# Project type: research
+
+name: research
+description: Minimal structure for research and analysis projects
+
+directories:
+  - notes
+  - sources
+  - output
+
+files:
+  - path: _domain.md
+    template: domain
+    required: true
+
+  - path: README.md
+    template: readme-research
+    required: true
+
+  - path: PLAN.md
+    template: plan-link
+    required: true
+
+  - path: notes/.gitkeep
+    template: gitkeep
+    required: true
+
+  - path: sources/.gitkeep
+    template: gitkeep
+    required: true
+
+  - path: output/.gitkeep
+    template: gitkeep
+    required: true
+
+  - path: notes/index.md
+    template: notes-index
+    required: true
+
+templates:
+  gitkeep: |
+    # Placeholder to keep directory in git
+
+  readme-research: |
+    # {project_name}
+
+    {description}
+
+    ## Research Questions
+
+    1. {question from plan}
+
+    ## Structure
+
+    - `notes/` - Working notes and observations
+    - `sources/` - Reference materials
+    - `output/` - Final deliverables
+
+    ## Status
+
+    - [ ] Research questions defined
+    - [ ] Sources gathered
+    - [ ] Analysis complete
+    - [ ] Output produced
+
+    ## Resources
+
+    - [Project Plan](./PLAN.md)
+
+  notes-index: |
+    # Research Notes
+
+    ## Overview
+
+    [Summary of research direction]
+
+    ## Notes
+
+    - [[note-1]] - {topic}
+
+    ## Key Findings
+
+    [Emerging insights]

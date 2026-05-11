@@ -1,0 +1,42 @@
+---
+type: workstation
+name: {{WORKSTATION_NAME}}
+purpose: {{WORKSTATION_PURPOSE}}
+---
+
+# {{WORKSTATION_NAME_TITLE}} Workstation
+
+{{WORKSTATION_PURPOSE}}
+
+## Stack
+
+(List key tools, libraries, languages, services this workstation operates with.)
+
+## Rules
+
+(List rules that apply only to work in this workstation. E.g., "All migrations require dry-run", "Mobile-first responsive", "Never deploy on Friday".)
+
+## Skills
+
+Skills scoped to this workstation live in `.claude/skills/`. Skills inherited from the instance global `.claude/skills/` are also available.
+
+| Skill | When to use |
+|-------|-------------|
+
+## Agents
+
+Agents scoped to this workstation live in `.claude/agents/`. Inherited agents from instance global also available.
+
+## MCP Servers
+
+See `.mcp.json` in this workstation for MCP servers loaded only here.
+
+## Mounted project
+
+`active-project/` is a symlink to the currently mounted project. Set with `/mount <project-path> {{WORKSTATION_NAME}}`.
+
+Read the project's `_domain.md` for project-specific context.
+
+## Parent
+
+This workstation is part of the {{INSTANCE_NAME}} instance. See `{{INSTANCE_HOME}}/CLAUDE.md` for instance-wide context.

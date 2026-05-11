@@ -1,0 +1,114 @@
+# Moderate Coding Project Structure
+# For: Medium projects, APIs, multi-file applications
+# Complexity: moderate (score 8-14)
+
+name: moderate-coding
+description: Standard structure for moderate coding projects
+
+directories:
+  - src
+  - src/lib
+  - tests
+  - docs
+
+files:
+  - path: _domain.md
+    template: domain
+    required: true
+
+  - path: README.md
+    template: readme
+    required: true
+
+  - path: PLAN.md
+    template: plan-link
+    required: true
+
+  - path: .mcp.json
+    template: mcp-config
+    condition: mcps.required is not empty
+
+  - path: src/main.py
+    template: python-main
+    condition: tech_stack.languages contains 'python'
+
+  - path: src/lib/__init__.py
+    template: python-init
+    condition: tech_stack.languages contains 'python'
+
+  - path: tests/test_main.py
+    template: python-test
+    condition: tech_stack.languages contains 'python'
+
+  - path: requirements.txt
+    template: python-requirements
+    condition: tech_stack.languages contains 'python'
+
+  - path: src/index.ts
+    template: typescript-main
+    condition: tech_stack.languages contains 'typescript'
+
+  - path: package.json
+    template: npm-package
+    condition: tech_stack.languages contains 'typescript' or tech_stack.languages contains 'javascript'
+
+  - path: tsconfig.json
+    template: tsconfig
+    condition: tech_stack.languages contains 'typescript'
+
+  - path: docs/notes.md
+    template: docs-notes
+    required: true
+
+templates:
+  python-requirements: |
+    # {project_name} dependencies
+    # Add your dependencies here
+
+  python-init: |
+    """{project_name} library modules."""
+
+  python-test: |
+    """Tests for {project_name}."""
+
+    import pytest
+
+    def test_placeholder():
+        """Placeholder test - replace with real tests."""
+        assert True
+
+  npm-package: |
+    {
+      "name": "{project_slug}",
+      "version": "0.1.0",
+      "description": "{description}",
+      "main": "src/index.ts",
+      "scripts": {
+        "start": "ts-node src/index.ts",
+        "test": "jest"
+      }
+    }
+
+  tsconfig: |
+    {
+      "compilerOptions": {
+        "target": "ES2020",
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true,
+        "outDir": "./dist"
+      },
+      "include": ["src/**/*"],
+      "exclude": ["node_modules"]
+    }
+
+  docs-notes: |
+    # Development Notes
+
+    ## Architecture Decisions
+
+    [Document key decisions here]
+
+    ## Notes
+
+    [Development notes as you work]

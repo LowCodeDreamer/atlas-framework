@@ -1,0 +1,289 @@
+# Complex Coding Project Structure
+# For: Large projects, enterprise apps, multi-service systems
+# Complexity: complex (score 15+)
+
+name: complex-coding
+description: Full structure for complex coding projects
+
+directories:
+  - src
+  - src/lib
+  - src/services
+  - src/utils
+  - tests
+  - tests/unit
+  - tests/integration
+  - docs
+  - docs/guides
+  - config
+  - scripts
+
+files:
+  # Core files
+  - path: _domain.md
+    template: domain
+    required: true
+
+  - path: README.md
+    template: readme
+    required: true
+
+  - path: PLAN.md
+    template: plan-link
+    required: true
+
+  - path: .mcp.json
+    template: mcp-config
+    condition: mcps.required is not empty
+
+  - path: .gitignore
+    template: gitignore
+    required: true
+
+  # Config files
+  - path: config/development.json
+    template: config-dev
+    required: true
+
+  - path: config/production.json
+    template: config-prod
+    required: true
+
+  # Python-specific
+  - path: src/main.py
+    template: python-main
+    condition: tech_stack.languages contains 'python'
+
+  - path: src/__init__.py
+    template: python-init
+    condition: tech_stack.languages contains 'python'
+
+  - path: src/lib/__init__.py
+    template: python-init
+    condition: tech_stack.languages contains 'python'
+
+  - path: src/services/__init__.py
+    template: python-init
+    condition: tech_stack.languages contains 'python'
+
+  - path: src/utils/__init__.py
+    template: python-init
+    condition: tech_stack.languages contains 'python'
+
+  - path: tests/__init__.py
+    template: python-init
+    condition: tech_stack.languages contains 'python'
+
+  - path: tests/unit/__init__.py
+    template: python-init
+    condition: tech_stack.languages contains 'python'
+
+  - path: tests/integration/__init__.py
+    template: python-init
+    condition: tech_stack.languages contains 'python'
+
+  - path: requirements.txt
+    template: python-requirements
+    condition: tech_stack.languages contains 'python'
+
+  - path: pyproject.toml
+    template: pyproject
+    condition: tech_stack.languages contains 'python'
+
+  # TypeScript-specific
+  - path: src/index.ts
+    template: typescript-main
+    condition: tech_stack.languages contains 'typescript'
+
+  - path: package.json
+    template: npm-package-full
+    condition: tech_stack.languages contains 'typescript' or tech_stack.languages contains 'javascript'
+
+  - path: tsconfig.json
+    template: tsconfig-full
+    condition: tech_stack.languages contains 'typescript'
+
+  # Documentation
+  - path: docs/architecture.md
+    template: docs-architecture
+    required: true
+
+  - path: docs/api.md
+    template: docs-api
+    condition: project_type == 'coding'
+
+  - path: docs/guides/getting-started.md
+    template: docs-getting-started
+    required: true
+
+  # Scripts
+  - path: scripts/setup.sh
+    template: setup-script
+    required: true
+
+templates:
+  gitignore: |
+    # Dependencies
+    node_modules/
+    __pycache__/
+    *.pyc
+    .venv/
+
+    # Build
+    dist/
+    build/
+    *.egg-info/
+
+    # Environment
+    .env
+    .env.local
+
+    # IDE
+    .idea/
+    .vscode/
+    *.swp
+
+    # OS
+    .DS_Store
+    Thumbs.db
+
+    # Logs
+    *.log
+    logs/
+
+  config-dev: |
+    {
+      "environment": "development",
+      "debug": true,
+      "log_level": "debug"
+    }
+
+  config-prod: |
+    {
+      "environment": "production",
+      "debug": false,
+      "log_level": "info"
+    }
+
+  pyproject: |
+    [project]
+    name = "{project_slug}"
+    version = "0.1.0"
+    description = "{description}"
+
+    [tool.pytest.ini_options]
+    testpaths = ["tests"]
+
+    [tool.black]
+    line-length = 88
+
+  npm-package-full: |
+    {
+      "name": "{project_slug}",
+      "version": "0.1.0",
+      "description": "{description}",
+      "main": "dist/index.js",
+      "scripts": {
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "dev": "ts-node src/index.ts",
+        "test": "jest",
+        "lint": "eslint src/"
+      },
+      "devDependencies": {
+        "typescript": "^5.0.0",
+        "ts-node": "^10.0.0",
+        "jest": "^29.0.0",
+        "@types/node": "^20.0.0"
+      }
+    }
+
+  tsconfig-full: |
+    {
+      "compilerOptions": {
+        "target": "ES2020",
+        "module": "commonjs",
+        "lib": ["ES2020"],
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "declaration": true
+      },
+      "include": ["src/**/*"],
+      "exclude": ["node_modules", "dist", "tests"]
+    }
+
+  docs-architecture: |
+    # Architecture
+
+    ## Overview
+
+    [High-level system design]
+
+    ## Components
+
+    [Key components and their responsibilities]
+
+    ## Data Flow
+
+    [How data moves through the system]
+
+    ## Decisions
+
+    [Key architectural decisions and rationale]
+
+  docs-api: |
+    # API Documentation
+
+    ## Endpoints
+
+    [Document API endpoints]
+
+    ## Authentication
+
+    [Authentication requirements]
+
+    ## Examples
+
+    [Usage examples]
+
+  docs-getting-started: |
+    # Getting Started
+
+    ## Prerequisites
+
+    - {prerequisite 1}
+    - {prerequisite 2}
+
+    ## Installation
+
+    ```bash
+    # Clone and setup
+    ```
+
+    ## Quick Start
+
+    ```bash
+    # Run the project
+    ```
+
+    ## Next Steps
+
+    - Read the [architecture docs](./architecture.md)
+    - Explore the codebase
+
+  setup-script: |
+    #!/bin/bash
+    # Setup script for {project_name}
+
+    set -e
+
+    echo "Setting up {project_name}..."
+
+    # Add setup steps here
+
+    echo "Setup complete!"
