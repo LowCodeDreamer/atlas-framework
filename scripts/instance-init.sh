@@ -102,23 +102,50 @@ substitute() {
 
 # === Place template files ===
 echo "→ Placing template files..."
-write_if_safe() {
+#
+# Behavior matrix:
+#   File doesn't exist          → write framework template
+#   File exists, fresh-install   → ERROR (we already exited above for CLAUDE.md collision)
+#   File exists, --existing-instance:
+#     - For CLAUDE.md, _domain.md, .mcp.json (cascade-critical):
+#         backup existing → <name>.pre-framework.<ts>, then write framework template
+#         (the framework cascade root MUST land; existing is preserved as backup)
+#     - For everything else (toggles.md, identity.env, registries):
+#         skip (don't clobber instance state)
+write_critical() {
     local dst=$1
     local src=$2
-    if [[ -f "$dst" ]] && [[ "$EXISTING_INSTANCE" == "yes" ]]; then
-        echo "    SKIP (exists): $(basename "$dst")"
+    local base=$(basename "$dst")
+    if [[ -f "$dst" ]]; then
+        local backup="${dst}.pre-framework.$(date -u +%Y%m%dT%H%M%SZ)"
+        cp "$dst" "$backup"
+        echo "    BACKUP: $base → $(basename "$backup")"
+    fi
+    substitute "$src" "$dst"
+    echo "    WROTE: $base"
+}
+
+write_if_absent() {
+    local dst=$1
+    local src=$2
+    local base=$(basename "$dst")
+    if [[ -f "$dst" ]]; then
+        echo "    SKIP (exists): $base"
     else
         substitute "$src" "$dst"
-        echo "    WROTE: $(basename "$dst")"
+        echo "    WROTE: $base"
     fi
 }
 
-write_if_safe "$TARGET/CLAUDE.md"           "$FRAMEWORK_ROOT/templates/instance/CLAUDE.md.template"
-write_if_safe "$TARGET/_domain.md"          "$FRAMEWORK_ROOT/templates/instance/_domain.md.template"
-write_if_safe "$TARGET/.mcp.json"           "$FRAMEWORK_ROOT/templates/instance/.mcp.json.template"
-write_if_safe "$TARGET/system/identity.env" "$FRAMEWORK_ROOT/templates/instance/system/identity.template.sh"
-write_if_safe "$TARGET/system/toggles.md"   "$FRAMEWORK_ROOT/templates/instance/system/toggles.md.template"
-write_if_safe "$TARGET/system/registries/services.md" "$FRAMEWORK_ROOT/templates/instance/system/registries/services.md.template"
+# Cascade-critical: framework template MUST land; existing backed up
+write_critical "$TARGET/CLAUDE.md"           "$FRAMEWORK_ROOT/templates/instance/CLAUDE.md.template"
+write_critical "$TARGET/_domain.md"          "$FRAMEWORK_ROOT/templates/instance/_domain.md.template"
+write_critical "$TARGET/.mcp.json"           "$FRAMEWORK_ROOT/templates/instance/.mcp.json.template"
+
+# Instance state: only write if absent (don't clobber)
+write_if_absent "$TARGET/system/identity.env" "$FRAMEWORK_ROOT/templates/instance/system/identity.template.sh"
+write_if_absent "$TARGET/system/toggles.md"   "$FRAMEWORK_ROOT/templates/instance/system/toggles.md.template"
+write_if_absent "$TARGET/system/registries/services.md" "$FRAMEWORK_ROOT/templates/instance/system/registries/services.md.template"
 
 # === Copy core/agents ===
 echo "→ Copying core agents..."
