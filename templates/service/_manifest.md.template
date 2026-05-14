@@ -1,55 +1,36 @@
 ---
-service: {{SERVICE_NAME}}
-status: active
-ports: []
-container: {{CONTAINER_NAME}}
-systemd_unit: {{SYSTEMD_UNIT}}
-owner: {{OWNER}}
-domain: {{DOMAIN}}
-dependencies: []
-config_path: {{CONFIG_PATH}}
-data_path: {{DATA_PATH}}
-log_path: {{LOG_PATH}}
-created: {{INIT_DATE}}
-updated: {{INIT_DATE}}
+type: service
+name: {{SERVICE_NAME}}
+status: {{SERVICE_STATUS}}
+created_at: {{INIT_DATE}}
+language: {{SERVICE_LANGUAGE}}
+runtime: {{SERVICE_RUNTIME}}
+exposes: {{SERVICE_EXPOSES}}
 ---
 
-# {{SERVICE_NAME_TITLE}}
+# {{SERVICE_NAME_TITLE}} Service
 
-(One-paragraph service description. What does it do? Why is it running here?)
+{{SERVICE_PURPOSE}}
+
+## Purpose
+
+(One paragraph. What does this service do for the instance? Why is it long-running rather than a bounded project?)
+
+## Surface
+
+(How does the rest of the instance talk to this service? HTTP, CLI, Unix socket, message bus?)
 
 ## Operations
 
-### Start / stop / restart
-
-```bash
-# (commands here, e.g., systemctl restart {{SYSTEMD_UNIT}})
-```
-
-### Health check
-
-```bash
-# (curl /health, docker ps, etc.)
-```
-
-### Logs
-
-```bash
-# (journalctl, docker logs, tail, etc.)
-```
-
-## Backups
-
-(How is this service's data backed up? When? Where? How is restore tested?)
+- **Start:** `{{SERVICE_START_CMD}}`
+- **Stop:** `{{SERVICE_STOP_CMD}}`
+- **Logs:** `{{SERVICE_LOGS_CMD}}`
+- **Health:** `{{SERVICE_HEALTH_CMD}}`
 
 ## Dependencies
 
-- (other services, databases, external APIs this depends on)
+(Other services, databases, MCP servers, secrets this service needs.)
 
-## Owners / on-call
+## Parent
 
-- (who responds when this breaks)
-
-## Recent changes
-
-<!-- log notable changes; replaces lossy commit-message archaeology -->
+This service is operated by the {{INSTANCE_NAME}} instance. See `{{INSTANCE_HOME}}/CLAUDE.md` for instance-wide context.

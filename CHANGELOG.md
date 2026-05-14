@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.2.0 — 2026-05-14
+
+### Added
+- `core/commands/init-workstation.md` — actually scaffolds workstation from template (was referenced in instance CLAUDE.md but missing).
+- `core/commands/init-service.md` — catalogs long-running services under `services/<name>/_manifest.md`.
+- `templates/service/_manifest.md.template` — service manifest template.
+- `scripts/smoke-test.sh` — post-init verification: every command CLAUDE.md references must exist; templates + hooks intact.
+
+### Fixed
+- v0.1.0 changelog falsely claimed `init-workstation` and `init-service` shipped; they did not. Now they do.
+
+
 ## v0.1.0 — 2026-05-11 (in progress)
 
 Initial extraction from Atlas. Pre-1.0; breaking changes possible.
