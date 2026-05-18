@@ -44,5 +44,9 @@ node_modules/
 /system/proposals/*
 /logs/sessions/*
 
+# Instance-specific bootstrap content (eno-foundation/community drafts, etc.)
+# These belong in the consuming instance, not the portable framework repo.
+/.bootstrap/
+
 # Allow .gitkeep files
 !.gitkeep
