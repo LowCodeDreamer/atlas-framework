@@ -75,11 +75,37 @@ ls ${INSTANCE_HOME}/expertise/domains/<workspace>/
 
 ### Step 4: Create Project Structure
 
-Create the project directory and files:
+Create the project directory, initialize as its own git repo, and scaffold files:
 
 ```bash
 mkdir -p ${INSTANCE_HOME}/projects/<domain>/<project>
+cd ${INSTANCE_HOME}/projects/<domain>/<project>
+git init -q
+
+cat > .gitignore <<'EOF'
+node_modules/
+.next/
+out/
+build/
+dist/
+.DS_Store
+.env
+.env.*
+__pycache__/
+*.pyc
+.tmp.*
+.venv/
+*.egg-info/
+*.tsbuildinfo
+.vercel
+EOF
 ```
+
+**Why `git init`**: Each Atlas project is its own git repo so Claude Code resolves
+the correct project scope (UI chip label) when launched here. Without `.git`, git
+walks up to find a parent toplevel, crossing project boundaries and producing wrong
+project context. No remote required — local-only is fine for projects that don't
+need pushing yet; `gh repo create --source .` can be added later.
 
 **Create `_manifest.md`:**
 ```yaml
