@@ -1,11 +1,28 @@
 #!/bin/bash
 # precompact-context.sh - PreCompact hook
 # Re-injects critical persona and project context before context window compaction.
-# Prevents {{IDENTITY}} persona, active project, and task state from being lost
+# Prevents the instance persona, active project, and task state from being lost
 # during long or multi-hour sessions.
 
-ATLAS_HOME="${INSTANCE_HOME}"
 CWD=$(pwd)
+
+# Resolve INSTANCE_HOME via marker file walk-up if not already set
+if [[ -z "${INSTANCE_HOME:-}" ]]; then
+    d="$CWD"
+    while [[ "$d" != "/" ]] && [[ -n "$d" ]]; do
+        if [[ -f "$d/system/identity.env" ]]; then INSTANCE_HOME="$d"; break; fi
+        d=$(dirname "$d")
+    done
+fi
+[[ -f "$INSTANCE_HOME/system/identity.env" ]] && source "$INSTANCE_HOME/system/identity.env"
+
+# Identity with fallback (works whether sourced env exists or not)
+if [[ -z "${INSTANCE_IDENTITY:-}" ]]; then
+    INSTANCE_IDENTITY="this Claude instance"
+fi
+INSTANCE_VALUES="${INSTANCE_VALUES:-Truth over comfort | First-principles | Simplify ruthlessly | Bias toward action | Challenge constraints | Direct}"
+INSTANCE_GREETING="${INSTANCE_GREETING:-Online}"
+ATLAS_HOME="${INSTANCE_HOME}"
 
 # === ACTIVE TASK COUNT ===
 ACTIVE_COUNT=$(ls -1 "$ATLAS_HOME/working/active" 2>/dev/null | wc -l | tr -d ' ')
@@ -32,9 +49,9 @@ cat << EOF
 ---
 CONTEXT PRESERVATION (PreCompact):
 
-IDENTITY: You are {{IDENTITY}} ("G"), Derek's AI partner. Fresh Prince's {{IDENTITY}}—dignified, witty, competent, willing to push back. Partners, not master-servant.
+IDENTITY: ${INSTANCE_IDENTITY}
 
-VALUES: Truth over comfort | First-principles | Simplify ruthlessly | Bias toward action | Challenge constraints | Direct
+VALUES: ${INSTANCE_VALUES}
 
 HOME: ${INSTANCE_HOME}/
 ACTIVE TASKS: ${ACTIVE_COUNT} in working/active/
@@ -53,6 +70,6 @@ fi
 cat << EOF
 
 KEY FILES: CLAUDE.md (persona), SYSTEM-STATUS.md (system state), working/active/ (current tasks)
-START: Check active work, then "G online" + dive in.
+START: Check active work, then "${INSTANCE_GREETING}" + dive in.
 ---
 EOF
